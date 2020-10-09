@@ -31,8 +31,16 @@ function stripeElements() {
         var form = document.getElementById("payment-form");
         form.addEventListener("submit", function(event) {
             event.preventDefault();
-            // Complete payment when the submit button is clicked
-            //payWithCard(stripe, card, data.clientSecret);
+            fetch("/api/subscription", {
+                method: "POST",
+                body: {
+                    customer_id: '',
+                    subscription_id: '',
+                    price_id: '',
+                    email: '',
+                    
+                }
+            })
         });
     })
 }
