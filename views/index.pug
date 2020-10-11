@@ -11,6 +11,7 @@ html(lang="en")
         script(src='/js/client.js')
     body
         form(id='payment-form')
+            input(type="text", name="name" placeholder="Customer")
             div(id='card-element')
             button(id='submit')
                 div(class=['spinner', 'hidden'], id='spinner')

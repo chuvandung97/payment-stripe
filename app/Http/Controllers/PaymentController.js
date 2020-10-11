@@ -24,7 +24,7 @@ class PaymentController {
     async storeSubscription(req, res) //customer_id, subscription_id, price_id, email, description, address: {city, country, line1, line2, postal_code, state}
     {
         var item = req.body
-        var customerId = createCustomer(item)
+        var customerId = await createCustomer(item)
         var subscriptionId = item.subscription_id
         if(subscriptionId) {
             let oldSubscription = await stripe.subscriptions.retrieve(subscriptionId);

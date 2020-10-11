@@ -33,13 +33,18 @@ function stripeElements() {
             event.preventDefault();
             fetch("/api/subscription", {
                 method: "POST",
-                body: {
-                    customer_id: '',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    customer_id: 'cus_IAFGQypqDqRURv',
                     subscription_id: '',
-                    price_id: '',
-                    email: '',
-                    
-                }
+                    price_id: 'price_1H2TnPBKlxcCDnEBquUtxiLB',
+                    email: 'talavodichthegioi@gmail.com',
+                })
+            }).then(() => {
+                console.log(1);
             })
         });
     })
