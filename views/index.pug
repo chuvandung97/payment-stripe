@@ -10,12 +10,25 @@ html(lang="en")
         script(src='https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch')
         script(src='/js/client.js')
     body
+        svg(width="243" height="569" viewBox="0 0 243 569" fill="none" xmlns="http://www.w3.org/2000/svg")
+            mask(id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="243" height="569")
+                rect(width="243" height="569" rx="8" transform="matrix(1 0 0 -1 0 569)" fill="#003F71")
+            g(mask="url(#mask0)")
+                path(opacity="0.05" fill-rule="evenodd" clip-rule="evenodd" d="M164 -114L144.207 -85.8107C124.414 -57.6214 96 1.57614 87.5173 57.9547C76.2069 114.333 82 170.712 107.448 229.909C130.069 286.288 158.345 342.667 152.69 399.045C144.207 458.243 104.621 514.621 82 542.811L62.2069 571L5.75277e-07 571L1.80747e-06 542.811C3.03966e-06 514.621 5.50405e-06 458.243 8.09166e-06 399.045C1.0556e-05 342.667 1.30204e-05 286.288 1.54848e-05 229.909C1.80724e-05 170.712 2.05368e-05 114.333 2.30012e-05 57.9547C2.54656e-05 1.57613 2.80532e-05 -57.6214 2.92854e-05 -85.8107L3.05176e-05 -114L164 -114Z" fill="white")
+                path(opacity="0.05" fill-rule="evenodd" clip-rule="evenodd" d="M41.8332 -115L50.3547 -90.3182C58.8762 -66.4876 76.7713 -17.9752 70.8063 30.5372C64.8413 79.0496 35.8682 127.562 32.4596 176.926C29.9031 225.438 53.7633 273.95 50.3547 322.463C47.7983 370.975 17.9731 419.488 3.48653 443.318L-11 468L-11 443.318C-11 419.488 -11 370.975 -11 322.463C-11 273.95 -11 225.438 -11 176.926C-11 127.562 -11 79.0496 -11 30.5372C-11 -17.9752 -11 -66.4876 -11 -90.3183L-11 -115L41.8332 -115Z" fill="white")
+                path(opacity="0.05" fill-rule="evenodd" clip-rule="evenodd" d="M96.4433 -114L103.405 -85C110.368 -57 123.297 -2.39113e-06 117.33 57C110.368 114 82.5189 171 79.5351 229C75.5568 286 96.4432 343 117.33 400C137.222 457 158.108 514 168.054 542L178 571L-0.999999 571L-0.999998 542C-0.999997 514 -0.999994 457 -0.999992 400C-0.999989 343 -0.999987 286 -0.999984 229C-0.999982 171 -0.999979 114 -0.999977 57C-0.999974 -7.82434e-06 -0.999972 -57 -0.999971 -85L-0.999969 -114L96.4433 -114Z" fill="white")
         form(id='payment-form')
-            input(type="text", name="name" placeholder="Customer")
+            input(type="text", id="name", name="name", placeholder="Customer name", value="VOdich")
+            input(type="email", id="email", name="email", placeholder="Email", value="talavodichthegioi@gmail.com")
+            input(type="text", id="company", name="company", placeholder="Company", value="Skymap")
+            input(type="text", id="address", name="address", placeholder="Address", value='HaDong, HaNoi')
+            input(type="number", id="zip_code", name="zip_code", min=0, placeholder="Zip code", value=10000)
+            input(type="text", id="country", name="country" placeholder="Country", value="Viet Nam")
             div(id='card-element')
             button(id='submit')
                 div(class=['spinner', 'hidden'], id='spinner')
                 span(id='button-text') Pay
-            p(id='card-error', role='alert')
+            p(id='card-element-errors', role='alert')
             p(class='result-message hidden') Payment succeeded, see the result in your
                 a(href='', target='_blank') Stripe dashboard.
+

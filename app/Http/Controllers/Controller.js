@@ -1,13 +1,12 @@
 class Controller {
     checkServerRunning(req, res) 
     {
-        /* res.send("Server run"); */
-        res.render('index')
+        res.send("Server run");
     }
 
     checkoutPage(req, res) 
     {
-
+        res.render('index')
     }
 }
 
