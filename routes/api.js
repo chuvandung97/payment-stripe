@@ -4,6 +4,7 @@ const router = express.Router()
 //Define Controller
 const paymentController = require("../app/Http/Controllers/PaymentController")
 const productController = require("../app/Http/Controllers/ProductController")
+const sessionController = require("../app/Http/Controllers/SessionController")
 
 //Payment
 router.post("/payment-intent", paymentController.storePaymentIntent)
@@ -14,5 +15,9 @@ router.delete("/subscription/cancel", paymentController.cancelSubscription)
 router.post("/product", productController.store)
 router.put("/product/:productId", productController.update)
 router.delete("/product/:productId", productController.delete)
+
+//Checkout-Session
+router.get("/checkout/session/:sessionId", sessionController.index)
+router.post("/checkout/session", sessionController.store)
 
 module.exports = router;

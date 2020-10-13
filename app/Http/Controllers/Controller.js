@@ -8,6 +8,16 @@ class Controller {
     {
         res.render('index')
     }
+
+    successPage(req, res)
+    {
+        res.render('success')
+    }
+
+    errorPage(req, res) 
+    {
+        res.render('error')
+    }
 }
 
 module.exports = new Controller;

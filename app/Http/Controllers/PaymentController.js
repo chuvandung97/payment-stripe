@@ -4,26 +4,21 @@ const stripe = require("stripe")("sk_test_51GzwUxBKlxcCDnEBnrQW4acbisIgr4SwtUWHt
 const { createCustomer } = require("../../../utils/user")
 
 class PaymentController {
-    async storePaymentIntent(req, res) //customer_id, payment_method, price_id, customer_detail: {email, description, address: {city, country, line1, line2, postal_code, state}}
+    async storePaymentIntent(req, res) //price_id
     {
         var item = req.body
-        var customerId = createCustomer(item)
         var price = await stripe.prices.retrieve(item.price_id)
         var product = await stripe.products.retrieve(price.product)
 
         const paymentIntent = await stripe.paymentIntents.create({ 
-            customer: customerId,
-            payment_method: item.payment_method,
             amount: price.unit_amount,
             currency: price.currency,
-            setup_future_usage: 'off_session',
             metadata: product.metadata
         })
-
         return res.status(200).json({ clientSecret: paymentIntent.client_secret })
     }
 
-    async storeSubscription(req, res) //customer_id, payment_method, subscription_id, price_id, customer_detail: {email, description, address: {city, country, line1, line2, postal_code, state}}
+    async storeSubscription(req, res) //customer_id, payment_method, subscription_id, price_id, customer_detail: {name, email, description, address: {city, country, line1, line2, postal_code, state}}
     {
         var item = req.body
         var customerId = await createCustomer(item)

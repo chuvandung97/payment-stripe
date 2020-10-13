@@ -6,6 +6,7 @@ module.exports = {
         var customerId = item.customer_id
         if(!customerId) {
             let user = await stripe.customers.create({
+                name: item.customer_detail.name,
                 email: item.customer_detail.email,
                 address: item.customer_detail.address,
                 payment_method: item.payment_method,

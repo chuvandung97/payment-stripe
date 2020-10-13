@@ -8,9 +8,13 @@ function stripeElements() {
         const priceId = param.get('priceId')
         const subscriptionId = param.get('subscriptionId')
 
-        document.querySelector("#button-text").innerHTML = "Pay"
-        if(typePayment == "subscription") {
-            document.querySelector("#button-text").innerHTML = "Subscribe"
+        document.querySelector("#button-text").innerHTML = "Subscribe"
+        if(typePayment == "payment") {
+            document.querySelector("#button-text").innerHTML = "Pay"
+            var paymentIntent = null;
+            paymentIntentPackage(priceId).then(data => {
+                paymentIntent = data
+            })
         } 
 
         // Card Element
@@ -57,7 +61,7 @@ function stripeElements() {
                 if(result.error) {  
                     displayError(result)
                 } else if(typePayment == "payment") {
-                    payPackage(result.paymentMethod.id, customerId, customerDetail, priceId)
+                    confirmCard(paymentIntent.clientSecret, result.paymentMethod.id)
                 } else if(typePayment == "subscription") {
                     createSubscription(result.paymentMethod.id, customerId, customerDetail, priceId, subscriptionId)
                 } else {
@@ -68,7 +72,7 @@ function stripeElements() {
     })
 }
 
-function payPackage(paymentMethodId, customerId, customerDetail, priceId) {
+async function paymentIntentPackage(priceId) {
     return fetch("/api/payment-intent", {
         method: "POST",
         headers: {
@@ -76,15 +80,10 @@ function payPackage(paymentMethodId, customerId, customerDetail, priceId) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            customer_id: customerId,
-            payment_method: paymentMethodId,
             price_id: priceId,
-            customer_detail: customerDetail
         })
-    }).then((result) => {
-        return result.json();
-    }).then((data) => {
-        confirmCard(data.clientSecret, paymentMethodId)
+    }).then(result => {
+        return result.json()
     })
 }
 
@@ -144,8 +143,7 @@ function confirmCard(clientSecret, paymentMethodId) {
         if (result.error) {
             displayError(result);
         } else {
-            alert(result.paymentIntent.id)
-            //orderComplete(result.paymentIntent.id);
+            window.location.href = "/success"
         }
     });
 }
