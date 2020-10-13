@@ -2,15 +2,9 @@ var stripe = Stripe("pk_test_51GzwUxBKlxcCDnEB15dSzfFxy0p8suq8C9uij9qB3gDPFi1OhR
 
 function stripeElements() {  
     document.addEventListener("DOMContentLoaded", function(event) {
-        const param = new URLSearchParams(document.location.search)
-        const typePayment = param.get('type')
-        const customerId = param.get('customerId')
-        const priceId = param.get('priceId')
-        const subscriptionId = param.get('subscriptionId')
-
-        document.querySelector("#button-text").innerHTML = "Subscribe"
+        var typePayment = document.querySelector(".form__submit").value
+        console.log(typePayment);
         if(typePayment == "payment") {
-            document.querySelector("#button-text").innerHTML = "Pay"
             var paymentIntent = null;
             paymentIntentPackage(priceId).then(data => {
                 paymentIntent = data
@@ -49,7 +43,7 @@ function stripeElements() {
                 address: {
                     line1: document.querySelector("#company").value,
                     line2: document.querySelector("#address").value,
-                    postal_code: document.querySelector("#zip_code").value,
+                    postal_code: document.querySelector("#zipCode").value,
                     state: document.querySelector("#country").value
                 }
             }
@@ -149,8 +143,7 @@ function confirmCard(clientSecret, paymentMethodId) {
 }
 
 function displayError(event) {
-    console.log(event);
-    let displayError = document.getElementById('card-element-errors');
+    let displayError = document.getElementById('card-error');
     if (event.error) {
         displayError.textContent = event.error.message;
     } else {

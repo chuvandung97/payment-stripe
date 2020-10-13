@@ -8,7 +8,7 @@ class SessionController {
         var session = await stripe.checkout.sessions.retrieve(req.params.sessionId, {
             expand: ['customer', 'line_items']
         })
-        return res.status(200).json({
+        /* return res.status(200).json({
             mode: session.mode,
             name: session.customer ? session.customer.name : null,
             email: session.customer ? session.customer.email : null,
@@ -16,6 +16,9 @@ class SessionController {
             product_name: session.line_items.data[0].description,
             product_currency: session.line_items.data[0].currency,
             product_amount: session.line_items.data[0].amount_total / 100
+        }) */
+        return res.status(200).json({
+            session
         })
     }
 

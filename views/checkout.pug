@@ -4,39 +4,30 @@ html(lang='en')
 		meta(charset='UTF-8')
 		meta(name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0')
 		meta(http-equiv='X-UA-Compatible' content='ie=edge')
-		title Document
-		// Google font
+		title Payment information
 		link(href='https://fonts.googleapis.com/css?family=Ubuntu&display=swap' rel='stylesheet')
-		// Main style
 		link(rel='stylesheet' href='/css/style.css')
+		script(src='/js/client.js' defer)
+		script(src='https://js.stripe.com/v3/')
+		script(src='https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch')
 	body
 		.main
 			.img
 				img(src='/images/border.svg' alt='border')
 			.content
 				.content__title Payment
-				.form
+				form#payment-form
 					.input-control
-						label.inp(for='inp')
-							input#inp(type='text' placeholder=' ')
+						label.inp(for='name')
+							input#name(type='text' placeholder=' ' value=name)
 							span.label Customer
 							span.focus-bg
-					.form__title Card details
 					.input-control
-						label.inp(for='id')
-							input#id(type='text' placeholder=' ')
-							span.label Card number
+						label.inp(for='email')
+							input#email(type='text' placeholder=' ' value=email)
+							span.label Email
 							span.focus-bg
-					.input-control.input-control--short
-						label.inp(for='date')
-							input#date(type='text' placeholder=' ')
-							span.label Date
-							span.focus-bg
-					.input-control.input-control--short
-						label.inp(for='ccv')
-							input#ccv(type='text' placeholder=' ')
-							span.label CVV
-							span.focus-bg
+					div#card-element
 					.form__title Bill information
 					.input-control
 						label.inp(for='firstName')
@@ -49,23 +40,27 @@ html(lang='en')
 							span.label Last name
 							span.focus-bg
 					.input-control
-						label.inp(for='firstName')
-							input#companyName(type='text' placeholder=' ')
+						label.inp(for='company')
+							input#company(type='text' placeholder=' ' value=address?address.line1:'')
 							span.label Company name
 							span.focus-bg
 					.input-control
-						label.inp(for='billing')
-							input#billing(type='text' placeholder=' ')
+						label.inp(for='address')
+							input#address(type='text' placeholder=' ' value=address?address.line2:'')
 							span.label Billing address
 							span.focus-bg
 					.input-control
 						label.inp(for='zipCode')
-							input#zipCode(type='text' placeholder=' ')
+							input#zipCode(type='text' placeholder=' ' value=address?address.postal_code:'')
 							span.label Zip code
 							span.focus-bg
 					.input-control
 						label.inp(for='country')
-							input#country(type='text' placeholder=' ')
+							input#country(type='text' placeholder=' ' value=address?address.state:'')
 							span.label Country
 							span.focus-bg
-					button.form__submit Pay usd$250
+					button.form__submit#submit
+						.spinner.hidden#spinner
+						span#button-text #{mode}
+					p#card-error(role="alert")
+					
