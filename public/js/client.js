@@ -2,8 +2,11 @@ var stripe = Stripe("pk_test_51GzwUxBKlxcCDnEB15dSzfFxy0p8suq8C9uij9qB3gDPFi1OhR
 
 function stripeElements() {  
     document.addEventListener("DOMContentLoaded", function(event) {
-        var typePayment = document.querySelector(".form__submit").value
-        console.log(typePayment);
+        var typePayment = document.querySelector("#button-text").textContent
+        var customerId = document.querySelector("#customerId").value
+        var priceId = document.querySelector("#priceId").value
+        var subscriptionId = document.querySelector("#subscriptionId").value
+
         if(typePayment == "payment") {
             var paymentIntent = null;
             paymentIntentPackage(priceId).then(data => {
@@ -15,14 +18,14 @@ function stripeElements() {
         let elements = stripe.elements()
         let style = {
             base: {
-            fontSize: '16px',
-            color: '#32325d',
-            fontFamily:
-                '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif',
-            fontSmoothing: 'antialiased',
-                '::placeholder': {
-                    color: '#a0aec0',
-                },
+                fontSize: '16px',
+                color: '#32325d',
+                fontFamily:
+                    '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif',
+                fontSmoothing: 'antialiased',
+                    '::placeholder': {
+                        color: '#a0aec0',
+                    },
             },
         }
         card = elements.create('card', { style: style })

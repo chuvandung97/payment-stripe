@@ -59,6 +59,9 @@ html(lang='en')
 							input#country(type='text' placeholder=' ' value=address?address.state:'')
 							span.label Country
 							span.focus-bg
+					input#customerId(type='text' hidden value=customer_id)
+					input#priceId(type='text' hidden value=price_id)
+					input#subscriptionId(type='text' hidden value=subscription_id)
 					button.form__submit#submit
 						.spinner.hidden#spinner
 						span#button-text #{mode}

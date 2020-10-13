@@ -16,10 +16,12 @@ class Controller {
             name: session.customer ? session.customer.name : null,
             email: session.customer ? session.customer.email : null,
             address: session.customer ? session.customer.address : null,
-            subscription_id: session.customer ? (session.customer.subscriptions.data.length > 0 ? session.customer.subscriptions.data[0].id : null) : null,
             product_name: session.line_items.data[0].description,
             product_currency: session.line_items.data[0].currency,
-            product_amount: session.line_items.data[0].amount_total / 100
+            product_amount: session.line_items.data[0].amount_total / 100,
+            subscription_id: session.customer ? (session.customer.subscriptions.data.length > 0 ? session.customer.subscriptions.data[0].id : null) : null,
+            price_id: session.line_items.data[0].price.id,
+            customer_id: session.customer ? session.customer.id : null,
         })
     }
 
