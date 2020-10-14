@@ -3,7 +3,7 @@ require("dotenv").config({path: path.join(__dirname, "../../../.env")});
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 class ProductController {
-    async store(req, res) //name, description, metadata, amount, currency, interval (day,week,month,year), interval_count (int), type (one_time, recurring)
+    async store(req, res) //name, description, metadata, amount, interval (day,week,month,year), interval_count (int), type (one_time, recurring)
     {
         var item = req.body
         var product = await stripe.products.create({
@@ -14,7 +14,7 @@ class ProductController {
         var priceObj = {
             billing_scheme: "per_unit",
             unit_amount: item.amount,
-            currency: item.currency,
+            currency: 'usd',
             product: product.id,
         }
         if(item.type == "recurring") {
