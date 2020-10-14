@@ -14,7 +14,7 @@ class Controller {
         return res.render('checkout', {
             mode: session.mode,
             name: session.customer ? session.customer.name : null,
-            email: session.customer ? session.customer.email : null,
+            email: session.customer ? session.customer.email : session.customer_email,
             address: session.customer ? session.customer.address : null,
             product_name: session.line_items.data[0].description,
             product_currency: session.line_items.data[0].currency,
