@@ -22,17 +22,22 @@ class Controller {
             subscription_id: session.customer ? (session.customer.subscriptions.data.length > 0 ? session.customer.subscriptions.data[0].id : null) : null,
             price_id: session.line_items.data[0].price.id,
             customer_id: session.customer ? session.customer.id : null,
+            redirect_url: session.success_url
         })
     }
 
     successPage(req, res)
     {
-        return res.render('success')
+        return res.render('success', {
+            redirect_url: req.query.redirect
+        })
     }
 
     errorPage(req, res) 
     {
-        return res.render('error')
+        return res.render('error', {
+            redirect_url: req.query.redirect
+        })
     }
 }
 

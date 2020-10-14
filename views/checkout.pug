@@ -13,7 +13,12 @@ html(lang='en')
 	body
 		.main
 			.img
-				img(src='/images/border.svg' alt='border')
+				img(src='/images/border.png' alt='border')
+				.plan
+					.plan__name
+						| #{product_name}
+					.plan__price
+						| $#{product_amount}
 			.content
 				.content__title Payment
 				form#payment-form
@@ -63,6 +68,7 @@ html(lang='en')
 					input#customerId(type='text' hidden value=customer_id)
 					input#priceId(type='text' hidden value=price_id)
 					input#subscriptionId(type='text' hidden value=subscription_id)
+					input#redirectUrl(type='text' hidden value=redirect_url)
 					button.form__submit#submit
 						.spinner.hidden#spinner
 						span#button-text #{mode}

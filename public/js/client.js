@@ -69,7 +69,7 @@ function stripeElements() {
     })
 }
 
-async function paymentIntentPackage(priceId) {
+function paymentIntentPackage(priceId) {
     return fetch("/api/payment-intent", {
         method: "POST",
         headers: {
@@ -119,7 +119,8 @@ function createSubscription(paymentMethodId, customerId, customerDetail, priceId
 function handlePaymentThatRequiresCustomerAction({subscription, paymentMethodId, priceId}) {
     if(subscription && subscription.status == "active") {
         loading(false);
-        return { subscription, priceId, paymentMethodId }
+        onCompletePayment()
+        //return { subscription, priceId, paymentMethodId }
     }
 
     let paymentIntent = subscription.latest_invoice.payment_intent
@@ -127,7 +128,8 @@ function handlePaymentThatRequiresCustomerAction({subscription, paymentMethodId,
         confirmCard(paymentIntent.client_secret, paymentMethodId)
     } else {
         loading(false);
-        return { subscription, priceId, paymentMethodId };
+        onCompletePayment()
+        //return { subscription, priceId, paymentMethodId };
     }
 }
 
@@ -139,8 +141,9 @@ function confirmCard(clientSecret, paymentMethodId) {
         loading(false);
         if (result.error) {
             displayError(result);
+            window.location.href = "/error"
         } else {
-            window.location.href = "/success"
+            onCompletePayment()
         }
     });
 }
@@ -154,7 +157,12 @@ function displayError(event) {
     }
 }
 
-var loading = function(isLoading) {
+function onCompletePayment() {
+    var redirectUrl = document.querySelector("#redirectUrl").value
+    window.location.href = "/success?redirect=" + redirectUrl
+}
+
+function loading(isLoading) {
     if (isLoading) {
       // Disable the button and show a spinner
         document.querySelector("button").disabled = true;

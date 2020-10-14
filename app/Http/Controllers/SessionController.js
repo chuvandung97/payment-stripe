@@ -26,8 +26,8 @@ class SessionController {
     {
         var item = req.body
         var sessionObj = {
-            success_url: "http://localhost:3000/success",
-            cancel_url: "http://localhost:3000/error",
+            success_url: item.redirect_url,
+            cancel_url: item.redirect_url,
             mode: item.mode,
             payment_method_types: ["card"],
             line_items: [
