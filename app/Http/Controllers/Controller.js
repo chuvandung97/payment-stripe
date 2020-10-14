@@ -1,4 +1,6 @@
-const stripe = require("stripe")("sk_test_51GzwUxBKlxcCDnEBnrQW4acbisIgr4SwtUWHtNw9FdBxzP8TvDHqGXwcZ7NyebTL80JWNOap4UZdzf96OXneI70200k532wJ9R");
+const path = require("path");
+require("dotenv").config({path: path.join(__dirname, "../../../.env")});
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 class Controller {
     checkServerRunning(req, res) 

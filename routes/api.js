@@ -17,7 +17,6 @@ router.put("/product/:productId", productController.update)
 router.delete("/product/:productId", productController.delete)
 
 //Checkout-Session
-router.get("/checkout/session/:sessionId", sessionController.index)
 router.post("/checkout/session", sessionController.store)
 
 module.exports = router;

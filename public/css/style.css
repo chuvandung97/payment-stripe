@@ -17,7 +17,7 @@ body {
 
 .main {
   width: 920px;
-  height: 620px;
+  height: 520px;
   margin: auto;
   background-color: #fff;
   display: flex;
@@ -88,8 +88,9 @@ body {
 }
 
 .form__submit {
-  margin-top: 12px;
+  margin-top: 25px;
   margin-bottom: 12px;
+  margin-left: 175px;
   background-color: #006EC5;
   outline: none;
   border: none;

@@ -1,27 +1,8 @@
-const express = require("express");
-const app = express();
-const stripe = require("stripe")("sk_test_51GzwUxBKlxcCDnEBnrQW4acbisIgr4SwtUWHtNw9FdBxzP8TvDHqGXwcZ7NyebTL80JWNOap4UZdzf96OXneI70200k532wJ9R");
+const path = require("path");
+require("dotenv").config({path: path.join(__dirname, "../../../.env")});
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 class SessionController {
-    async index(req, res)
-    {
-        var session = await stripe.checkout.sessions.retrieve(req.params.sessionId, {
-            expand: ['customer', 'line_items']
-        })
-        /* return res.status(200).json({
-            mode: session.mode,
-            name: session.customer ? session.customer.name : null,
-            email: session.customer ? session.customer.email : null,
-            subscription_id: session.customer ? (session.customer.subscriptions.data.length > 0 ? session.customer.subscriptions.data[0].id : null) : null,
-            product_name: session.line_items.data[0].description,
-            product_currency: session.line_items.data[0].currency,
-            product_amount: session.line_items.data[0].amount_total / 100
-        }) */
-        return res.status(200).json({
-            session
-        })
-    }
-
     async store(req, res) //mode, customer_id, email, price_id
     {
         var item = req.body
