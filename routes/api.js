@@ -9,6 +9,7 @@ const sessionController = require("../app/Http/Controllers/SessionController")
 //Payment
 router.post("/payment-intent", paymentController.storePaymentIntent)
 router.post("/subscription", paymentController.storeSubscription)
+router.post("/retry-invoice", paymentController.retryInvoice)
 router.delete("/subscription/cancel", paymentController.cancelSubscription)
 
 //Product
@@ -17,6 +18,7 @@ router.put("/product/:productId", productController.update)
 router.delete("/product/:productId", productController.delete)
 
 //Checkout-Session
+router.get("/checkout/session/:sessionId", sessionController.index)
 router.post("/checkout/session", sessionController.store)
 
 module.exports = router;

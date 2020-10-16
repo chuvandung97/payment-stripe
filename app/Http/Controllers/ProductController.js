@@ -29,7 +29,7 @@ class ProductController {
 
     async update(req, res)
     {
-        /* var item = req.body
+        var item = req.body
         var product = await stripe.products.update(req.params.productId, {
             name: item.name,
             description: item.description,
@@ -46,7 +46,7 @@ class ProductController {
                 interval_count: item.interval_count
             }
         }
-        await stripe.prices.update(product.id, priceObj) */
+        await stripe.prices.update(product.id, priceObj)
     }
 
     async delete(req, res)

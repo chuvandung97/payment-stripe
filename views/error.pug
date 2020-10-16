@@ -1,5 +1,14 @@
 html
 	head
+		meta(charset='UTF-8')
+		meta(name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0')
+		meta(http-equiv='X-UA-Compatible' content='ie=edge')
+		title Payment information
+		link(href='https://fonts.googleapis.com/css?family=Ubuntu&display=swap' rel='stylesheet')
+		link(rel='stylesheet' href='/css/style.css')
+		script(src='/js/client.js' defer)
+		script(src='https://js.stripe.com/v3/')
+		script(src='https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch')
 	body
 		div(style="height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; background-image: url('/images/background-payment.jpg'); background-size: cover")
 			div(style='height: 493px; border: 1px solid lightgray; border-radius: 5px; display: flex')
@@ -56,8 +65,7 @@ html
 						div(style='width: 100%; text-align: center; display: flex; justify-content: center; margin-top: 24px; flex-direction: column')
 							div(style='width: 100%; text-align: center; display: flex; justify-content: center;')
 								div(style='width: 260px;')
-									span(style='font-size: 14px')
-										| Your payment information has been sent to your email. Also, you can view all your transactions in the Order Invoice page
+									span#text-error(style='font-size: 14px')
 							div(style='margin-top: 52px')
 								a(href=redirect_url)
 									button(style='width: 125px; height: 48px; background: #c50000b0; color: white; border-radius: 5px; border: none; cursor: pointer') OK
